@@ -107,6 +107,6 @@ def evaluate_coco(generator, model, threshold=0.05):
     # ax.plot(x, pr_9, label='IoU@0.9')
     ax.set_ylim(bottom = 0.)
     plt.legend(labels=lbl,bbox_to_anchor=(2, 1), loc="upper right")
-    plt.savefig("PR_Curve.png")
+    plt.savefig("PR_Curve.png", bbox_inches="tight")
     plt.show()
     return coco_eval.stats
