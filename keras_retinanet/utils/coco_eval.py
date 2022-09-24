@@ -19,7 +19,7 @@ from pycocotools.cocoeval import COCOeval
 from tensorflow import keras
 import numpy as np
 import json
-import matplotlib as plt
+import matplotlib.pyplot as plt
 
 import progressbar
 assert(callable(progressbar.progressbar)), "Using wrong progressbar module, install 'progressbar2' instead."
