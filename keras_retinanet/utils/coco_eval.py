@@ -90,4 +90,22 @@ def evaluate_coco(generator, model, threshold=0.05):
     coco_eval.evaluate()
     coco_eval.accumulate()
     coco_eval.summarize()
+    all_precision = coco_eval.eval['precision']
+
+    pr_5 = all_precision[0, :, :, 0, 1] # data for IoU@0.5
+    pr_7 = all_precision[4, :, :, 0, 1] # data for IoU@0.7
+    pr_9 = all_precision[8, :, :, 0, 1] # data for IoU@0.9
+
+    lbl=['Cicadellidae', 'Locustidea', 'Miridae', 'Prodenia litura', 'Aphids', 'Beet armyworm', 'Blister beetle', 'Corn borer', 'Flax budworm', 'Grub', 'Legume blister beetle', 'Mole cricket', 'Wireworm']
+    x = np.arange(0, 1.01, 0.01)
+    ax = plt.subplot(1, 1, 1)
+    plt.rcParams["figure.figsize"] = [7.00, 3.50]
+    plt.rcParams["figure.autolayout"] = True
+    ax.plot(x, pr_5)
+    # ax.plot(x, pr_7, label='IoU@0.7')
+    # ax.plot(x, pr_9, label='IoU@0.9')
+    ax.set_ylim(bottom = 0.)
+    plt.legend(labels=lbl,bbox_to_anchor=(2, 1), loc="upper right")
+    plt.savefig("PR_Curve.png")
+    plt.show()
     return coco_eval.stats
